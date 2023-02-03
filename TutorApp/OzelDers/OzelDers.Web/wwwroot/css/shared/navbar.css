@@ -1,0 +1,10 @@
+/* App Navbar */
+.app-navbar .nav-item {
+  border-radius: 12px;
+  padding: 0 0.4rem;
+  margin-left: 0.2rem;
+}
+
+.app-navbar .nav-item:hover {
+  background-color: var(--color-hover);
+}

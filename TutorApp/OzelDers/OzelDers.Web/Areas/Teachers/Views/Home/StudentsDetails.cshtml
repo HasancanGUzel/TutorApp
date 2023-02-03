@@ -1,0 +1,34 @@
+﻿@using OzelDers.Web.Areas.Teachers.Models.Dtos;
+@model StudentDetailsDto
+
+<div class="card profile-detail">
+    <div class="card-body">
+        <div class="row d-flex flex-column flex-md-row align-items-center">
+            <div class="col-5 text-center mb-4 mb-md-0">
+              <img class="avatar" src="~/images/@Model.ImageUrl">
+            </div>
+
+            <div class="col-7 d-flex flex-column align-items-center align-items-md-start ps-md-4">
+              <h1 class="fullname">@Model.FirstName @Model.LastName</h1>
+              
+              <p class="about">@Model.About</p>
+
+              <span class="location d-block"><i class="fa fa-map-marker me-2"></i>@Model.City - @Model.Location</span>
+
+
+              <div class="lesson-list">
+                @foreach (var lesson in Model.Lessons)
+                {
+                  <span class="lesson-badge badge bg-secondary my-3 display-6">@lesson.Name</span>
+                }
+              </div>
+              
+              <p class="card-text">@($"{Model.Price:C0}")</p>
+              
+              <button type="submit" class="btn btn-success"><i class="fa fa-envelope me-2"> </i>Mesaj Gönder</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+

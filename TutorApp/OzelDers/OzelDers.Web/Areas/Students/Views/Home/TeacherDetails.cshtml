@@ -1,0 +1,108 @@
+﻿@using OzelDers.Web.Areas.Students.Models.Dtos;
+@model TeacherDetailsDto
+
+<div class="card profile-detail">
+    <div class="card-body">
+        <div class="row d-flex flex-column flex-md-row align-items-center">
+            <div class="col-5 text-center mb-4 mb-md-0">
+              <img class="avatar" src="~/images/@Model.ImageUrl">
+            </div>
+
+            <div class="col-7 d-flex flex-column align-items-center align-items-md-start ps-md-4">
+              <h1 class="fullname">@Model.FirstName @Model.LastName</h1>
+              
+
+              <span class="branch badge bg-light text-dark fs-6 my-2 mb-3">@Model.Branch.Name</span>
+
+                <span class=" badge bg-light text-dark fs-6 my-2 mb-3"><i class="fa fa-phone me-2"></i>@Model.Phone</span>
+              
+              <span class="location d-block"><i class="fa fa-map-marker me-2"></i>@Model.City - @Model.Location</span>
+              
+              <p class="about">@Model.About</p>
+              
+              <div class="lesson-list">
+                @foreach (var lesson in Model.Lessons)
+                {
+                  <span class="lesson-badge badge bg-secondary my-3 display-6">@lesson.Name</span>
+                }
+              </div>
+              
+              <p class="card-text fw-bold fs-3">@($"{Model.Price:C0}")</p>
+              
+              <button type="submit" class="btn btn-success"><i class="fa fa-envelope me-2"> </i>Mesaj Gönder</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <form asp-controller="Comment"
+              asp-action="Create"
+              method="post">
+
+            <input type="hidden" name="CommentAddDto.TeacherId" value="@Model.Id" />
+
+            <div class="form-group">
+                <label class="Yorum Ekle"></label>
+                <textarea class="form-control" rows="5" asp-for="CommentAddDto.Content"></textarea><br />
+                <button type="submit" class="btn btn-success">Yorum Yap </button>
+            </div>
+            <div>
+                <h6 class="mt-3 display-6">Yorumlar</h6>
+            </div>
+        </form>
+        @foreach (var comments in Model.Comments)
+        {
+            <div class="form-group">
+
+
+                <div class="card mb-3">
+                    <div class="card-header d-flex justify-content-between">
+
+                        <button class="rounded-circle btn btn-outline-secondary border-1"><i class="fa fa-regular fa-user me-2" ></i>@comments.User.UserName</button>
+                        <span class=""></span>
+                        <span style="font-size:13px; " class="ms-3">Eklenme Tarihi : @comments.DateAdded</span>
+                    </div>
+                    
+                        
+
+                   
+                    <div class="card-body">
+                        <span>@comments.Content</span>
+                    </div>
+                    @if (Model.UserId == comments.UserId)
+                    {
+                        <div class="card-footer">
+                            <div>
+                                <a class="btn btn-danger"
+                           asp-area="Students"
+                           asp-controller="Comment"
+                           asp-action="Delete"
+                           asp-route-id="@comments.Id"> Sil </a>
+
+                                <a class="btn btn-warning"
+                           asp-area="Students"
+                           asp-controller="Comment"
+                           asp-action="Edit"
+                           asp-route-id="@comments.Id">Düzenle </a>
+                            </div>
+
+                        </div>
+                    }
+
+
+
+                </div>
+
+
+            </div>
+
+
+        }
+
+
+
+    </div>
+</div>
+

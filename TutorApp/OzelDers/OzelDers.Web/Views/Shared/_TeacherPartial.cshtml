@@ -1,0 +1,39 @@
+﻿@using OzelDers.Web.Models.Dtos
+@model TeacherListDto
+
+<div class="card profile-card card-teacher mb-2">
+
+  <img class="avatar" draggable="false" src="/images/@Model.ImageUrl"  />
+
+  <div class="card-body text-center">
+    <strong class="fullname d-block"> @Model.FirstName @Model.LastName </strong>
+
+    <span class="experience d-block">@Model.Experience</span>
+    <span class="location d-block"><i class="fa fa-map-marker me-2"></i>@Model.City - @Model.Location</span>
+
+    <span class="price">
+      <span class="price-label"><i class="fa fa-tag me-2" ></i> Ders fiyatı:</span>
+      <span class="price-value">@($"{Model.Price:C2}")</span>
+    </span>
+  </div>
+  
+  <div class="card-footer bg-light d-flex justify-content-around">
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Student")) {
+    <a
+      class="btn btn-primary btn-sm w-100"
+      asp-area="Students"
+      asp-controller="Home"
+      asp-action="TeacherDetails"
+      asp-route-teacherid="@Model.Id"
+      > <i class="fa fa-info me-1"></i> Detay</a
+    >
+    } else {
+    <a
+      class="btn btn-primary btn-sm w-100"
+      asp-controller="Account"
+      asp-action="Student"
+      ><i class="fa fa-info me-1"></i> Detay</a
+    >
+    }
+  </div>
+</div>

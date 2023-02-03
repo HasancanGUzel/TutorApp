@@ -1,0 +1,44 @@
+﻿@model LessonUpdateDto
+<h1>Ders Düzenleme</h1>
+<hr />
+<form class="form form-bordered" asp-area="Admin" asp-controller="Lesson" asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+   
+    <div class="row">
+        <div class="col-4">
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label> 
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span> 
+            </div>
+           
+            <div class="mb-3">
+                <label asp-for="Url" class="form-label"></label> 
+                <input class="form-control" asp-for="Url">
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+            <a type="submit" class="btn btn-danger"
+                    asp-area="Admin"
+                    asp-controller="Lesson"
+                    asp-action="Delete"
+                    asp-route-id=@Model.Id>
+                Sil
+            </a>
+            <a type="submit" class="btn btn-warning"
+                    asp-area="Admin"
+                    asp-controller="Lesson"
+                    asp-action="Index"
+            >
+                Vazgeç
+            </a>
+
+
+
+        </div>
+    </div>
+
+</form>

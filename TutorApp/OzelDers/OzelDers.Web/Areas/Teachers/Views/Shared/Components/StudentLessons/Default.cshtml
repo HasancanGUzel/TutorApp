@@ -1,0 +1,12 @@
+﻿@using OzelDers.Entity.Concrete
+@model List<Lesson>
+<div class="list-group list-group-light list-group-small">
+  <a class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedLesson==null ? "active" : "")" asp-area="Teachers"
+    asp-controller="Home" asp-action="StudentList" asp-route-studentlessonurl="">Tümünü Göster</a>
+  @foreach (var lesson in Model)
+  {
+    <a class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedLesson==lesson.Url ? "active" : "")"
+    asp-area="Teachers" asp-controller="Home" asp-action="StudentList"
+    asp-route-studentlessonurl=@lesson.Url>@lesson.Name</a>
+  }
+</div>

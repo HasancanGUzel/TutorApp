@@ -1,0 +1,232 @@
+﻿@using OzelDers.Web.Models.Dtos;
+@model RegisterDto
+
+<form class="user-register-form card px-4 py-4" asp-controller="Account" asp-action="Teacher" method="post"
+      enctype="multipart/form-data">
+
+    <h1 class="text-muted">Öğretmen Kayıt</h1>
+
+    <div class="row">
+        <div class="row">
+            <div class="col-12 text-center">
+                <label for="ImageFile">
+                    <div class="row">
+                        <div class="col-12">
+                            <img id="img-viewer" class="img-viewer" src="/public/images/user_placeholder.png" />
+                        </div>
+                    </div>
+                    <span id="uploadPhotoButton" class="btn btn-primary btn-lg my-3"><i class="fa fa-upload me-2"></i>Fotoğraf Yükle</span>
+                </label>
+                <input type="file" class="form-control form-control-lg d-none" asp-for="ImageFile" accept="image/" />
+                <span asp-validation-for="ImageFile" class="form-text text-danger mb-2"></span>
+            </div>
+            <div class="mx-auto d-block text-center mb-4">
+                <span id="removePhotoButton" class="btn btn-danger btn-lg my-3 d-none"><i class="fa fa-trash me-2"></i>Fotoğrafı Kaldır</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8">
+
+            <div class="row">
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input id="firstname" class="form-control form-control-lg" asp-for="FirstName">
+                        <label for="firstname" asp-for="FirstName" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="FirstName" class="form-text text-danger mb-2"></span>
+                </div>
+
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input id="lastname" class="form-control form-control-lg" asp-for="LastName">
+                        <label for="lastname" asp-for="LastName" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="LastName" class="form-text text-danger mb-2"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input id="username" class="form-control form-control-lg" asp-for="UserName">
+                        <label for="username" asp-for="UserName" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="UserName" class="form-text text-danger mb-2"></span>
+                </div>
+
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input id="email" class="form-control form-control-lg" asp-for="Email">
+                        <label for="email" asp-for="Email" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="Email" class="form-text text-danger mb-2"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input id="phone" class="form-control form-control-lg" asp-for="Phone">
+                        <label id="phone" asp-for="Phone" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="Phone" class="form-text text-danger mb-2"></span>
+                </div>
+
+                <div class="mb-4 col-12 col-lg-6">
+                    <select asp-for="Gender" asp-items="@Model.GenderSelectList" class="form-select form-select-lg">
+                    </select>
+                    <span asp-validation-for="Gender" class="form-text text-danger mb-2"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <textarea id="about" rows="4" class="form-control" asp-for="About"></textarea>
+                        <label for="about" asp-for="About" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="About" class="form-text text-danger mb-2"></span>
+                </div>
+
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <textarea id="address" rows="4" class="form-control" asp-for="Adress"></textarea>
+                        <label for="address" asp-for="Adress" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="Adress" class="form-text text-danger mb-2"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-4 col-12 col-lg-6">
+                    <label asp-for="City" class="form-label"></label>
+                    <select asp-for="City" asp-items="@Model.CityList" class="form-select form-select-lg">
+                    </select>
+                    <span asp-validation-for="City" class="form-text text-danger mb-2"></span>
+                </div>
+
+
+                <div class="mb-4 col-12 col-lg-6">
+                    <label asp-for="Location" class="form-label"></label>
+                    <select asp-for="Location" asp-items="@Model.IlceList" class="form-select form-select-lg">
+                    </select>
+                    <span asp-validation-for="Location" class="form-text text-danger mb-2"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input id="password" class="form-control form-control-lg" asp-for="Password">
+                        <label for="password" asp-for="Password" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="Password" class="form-text text-danger mb-2"></span>
+                </div>
+
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input id="rePassword" class="form-control form-control-lg" asp-for="RePassword">
+                        <label for="rePassword" asp-for="RePassword" class="form-label"></label>
+                    </div>
+                    <span asp-validation-for="RePassword" class="form-text text-danger mb-2"></span>
+                </div>
+
+                <div class="mb-4 col-12 col-lg-6">
+                    <div class="form-outline">
+                        <input type="checkbox" class="form-check-input" asp-for="IsHome" />
+                        <label asp-for="IsHome" class="form-label"></label>
+                        <span asp-validation-for="IsHome" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="col-12 col-lg-4">
+
+            <div class="mb-4">
+                <div class="form-outline">
+                    <input id="price" class="form-control form-control-lg" asp-for="Price">
+                    <label for="price" asp-for="Price" class="form-label"></label>
+                </div>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <select asp-for="Experience" asp-items="@Model.DeneyimList" class="form-select form-select-lg"></select>
+                <span asp-validation-for="Experience" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label" asp-for="Branches"></label><br />
+                @foreach (var branch in Model.Branches)
+                {
+                    <div>
+                        <input type="radio" id="@branch.Id" class="form-check-input mb-2" name="selectedBranchIds"
+                           value="@branch.Id" />
+                        <label for="@branch.Id">@branch.Name</label>
+                    </div>
+
+                }
+                <span asp-validation-for="SelectedBranchIds" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label" asp-for="Lessons"></label>
+                @foreach (var lesson in Model.Lessons)
+                {
+                    <div>
+                        <input type="checkbox" id="lesson-@lesson.Id" class="form-check-input mb-2" name="selectedLessonIds"
+                           value="@lesson.Id" @if (Model.SelectedLessonIds!=null) {
+                    @(Model.SelectedLessonIds.Any(sc=>sc==lesson.Id) ?
+                           "checked" : "")
+ } />
+                        <label for="lesson-@lesson.Id" class="form-check-label">@lesson.Name</label>
+                    </div>
+
+                }
+
+                <span asp-validation-for="SelectedLessonIds" class="text-danger"></span>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 my-3">
+                <button type="submit" class="btn btn-primary btn-lg me-2"><i class="fa fa-user-plus me-2"></i>Kayıt Ol</button>
+                <a type="button" class="btn btn-light btn-lg" asp-controller="Home" asp-action="Index">Vazgeç</a>
+            </div>
+        </div>
+
+    </div>
+
+
+</form>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<script>
+
+    const imgViewer = document.getElementById('img-viewer');
+    const imgFile = document.getElementById('ImageFile');
+    const uploadPhotoButton = document.getElementById('uploadPhotoButton');
+    const removePhotoButton = document.getElementById('removePhotoButton');
+
+    imgFile.addEventListener('change', (event) => {
+        removePhotoButton.classList.remove('d-none');
+        const files = event.target.files;
+        imgViewer.setAttribute('src', window.URL.createObjectURL(files[0]));
+    });
+
+    removePhotoButton.addEventListener('click', () => {
+        imgFile.value = ''
+        imgViewer.src = '/public/images/user_placeholder.png'
+        removePhotoButton.classList.add('d-none')
+    })
+
+</script>

@@ -1,0 +1,27 @@
+﻿@model RoleDto
+<h1> Role Oluştur</h1>
+<hr />
+<form asp-area="Admin"
+      asp-controller="Role"
+      asp-action="Create"
+      method="post">
+    <div class="row">
+        <div class="col-4">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <input class="form-control" asp-for="Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">oluştur</button>
+            <a type="button" class="btn btn-light"
+               asp-area="Admin"
+               asp-controller="Role"
+               asp-action="Index">Vazgeç</a>
+        </div>
+    </div>
+</form>

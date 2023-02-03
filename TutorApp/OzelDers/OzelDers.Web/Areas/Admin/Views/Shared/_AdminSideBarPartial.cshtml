@@ -1,0 +1,35 @@
+﻿<div class="mb-2">
+  <a class="btn btn-info btn-sm" href="/" target="_blank"><i class="fa fa-external-link me-2"></i>Uygulamayı Aç</a>
+</div>
+<hr />
+<div class="list-group list-group-light list-group-small">
+
+  <a asp-area="Admin" asp-controller="Lesson" asp-action="Index"
+    class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedMenu=="Lesson" ? "active" : "")">Dersler</a>
+
+  <a asp-area="Admin" asp-controller="Branch" asp-action="Index"
+    class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedMenu=="Branch" ? "active" : "")">Branşlar</a>
+
+  <a asp-area="Admin" asp-controller="Role" asp-action="Index"
+    class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedMenu=="Role" ? "active" : "")">Roller</a>
+
+  <a asp-area="Admin" asp-controller="Role" asp-action="UserRoles"
+    class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedMenu=="UserRoles" ? "active" : "")">Rol Atama</a>
+
+    <a asp-area="Admin"
+       asp-controller="Student"
+       asp-action="Index"
+       class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedMenu=="Student" ? "active" : "")">Öğrenciler</a>
+
+
+    <a asp-area="Admin"
+       asp-controller="Teacher"
+       asp-action="Index"
+       class="list-group-item list-group-item-action px-3 @(ViewBag.SelectedMenu=="Teacher" ? "active" : "")">Öğretmenler</a>
+
+
+  <a asp-area="" asp-controller="Account" asp-action="Logout"
+    class="list-group-item list-group-item-action px-3">Çıkış
+    Yap</a>
+
+</div>

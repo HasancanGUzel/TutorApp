@@ -1,0 +1,42 @@
+/* Profile Card */
+.profile-card {
+  position: relative;
+}
+
+.profile-card .avatar{
+  width: 92px;
+  height: 92px;
+  display: inline-block;
+  margin: 12px auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.profile-card .card-body span {
+  margin: 12px 0;
+}
+
+.profile-card .card-body .fullname {
+  font-size: 1.2rem;
+  width: 90%;
+  margin: 0 auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.profile-card .card-body .price .price-value {
+  font-weight: 600;
+}
+
+.admin-panel-navigation-card {
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 1199px) {
+  .admin-panel-navigation-card {
+    aspect-ratio: 16/9;
+    margin-bottom: 12px;
+  }
+}

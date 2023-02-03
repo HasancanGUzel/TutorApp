@@ -1,0 +1,17 @@
+/* Profile Detail */
+.profile-detail {
+  position: relative;
+  padding: 2rem;
+}
+
+.profile-detail .avatar {
+  width: 100%;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.profile-detail .lesson-badge {
+  font-size: 0.9rem;
+}

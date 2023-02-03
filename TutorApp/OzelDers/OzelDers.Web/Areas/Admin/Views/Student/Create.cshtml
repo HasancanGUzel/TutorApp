@@ -1,0 +1,185 @@
+﻿@using OzelDers.Web.Areas.Admin.Models.Dtos;
+@model StudentDto
+
+<h1>Öğrenci Ekle</h1>
+<hr />
+<form asp-area="Admin"
+      asp-controller="Student"
+      asp-action="Create"
+      method="post"
+      enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col-8">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row">
+                <div class="mb-3 col-4">
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <input class="form-control" asp-for="FirstName">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="mb-3 col-4">
+                    <label asp-for="LastName" class="form-label"></label>
+                    <input class="form-control" asp-for="LastName">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-4">
+                    <img id="img-viewer" src="" />
+                    <input type="file" asp-for="ImageFile" accept="image/" />
+                    <div>
+                        <label for="ImageFile" class="btn btn-success">Resim Yükle</label>
+                        <label id="img-url">@Model.ImageUrl</label>
+                    </div>
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+               
+
+                <div class="mb-3 col-4">
+                    <label asp-for="About" class="form-label"></label>
+                    <textarea class="form-control" asp-for="About"></textarea>
+                    <span asp-validation-for="About" class="text-danger"></span>
+                </div>
+
+
+
+
+                <div class=" mb-3 col-4">
+                    <label asp-for="City" class="form-label"></label>
+                    <select asp-for="City" asp-items="@Model.CityList" class="form-select">
+                    </select>StudentDto
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+
+                <div class=" mb-3 col-4">
+                    <label asp-for="Location" class="form-label"></label>
+                    <select asp-for="Location" asp-items="@Model.IlceList" class="form-select">
+                    </select>
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+
+
+
+
+                <div class="mb-3 col-4">
+                    <label asp-for="Adress" class="form-label"></label>
+                    <input class="form-control" asp-for="Adress">
+                    <span asp-validation-for="Adress" class="text-danger"></span>
+                </div>
+
+                <div class="col-4 mb-3">
+                    <label asp-for="Gender" class="form-label"></label>
+                    <select asp-for="Gender" asp-items="@Model.GenderSelectList" class="form-select">
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="mb-3 col-4">
+                    <label asp-for="UserName" class="form-label"></label>
+                    <input class="form-control" asp-for="UserName">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="mb-3 col-4">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input class="form-control" asp-for="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+
+
+                @{
+                    DateTime today = DateTime.Now;
+                    int yearToday = today.Year;
+                    int year = yearToday - 18;
+                    int month = today.Month;
+                    int day = today.Day;
+                    DateTime minBirthOfDate = new DateTime(year, month, day);
+                }
+                <div class="col-6 mb-3">
+                    <label asp-for="DateOfBirth" class="form-label"></label>
+                    <input type="date"
+                           class="form-control"
+                           asp-for="DateOfBirth"
+                           value="@(Model.DateOfBirth.ToString("yyyy-MM-dd")=="0001-01-01" ? minBirthOfDate.ToString("yyyy-MM-dd") : Model.DateOfBirth.ToString("yyyy-MM-dd"))"
+                           min="1900-01-01"
+                           max="@minBirthOfDate.ToString("yyyy-MM-dd")">
+                    <span asp-validation-for="@Model.DateOfBirth" class="text-danger"></span>
+                </div>
+
+
+
+            </div>
+
+
+
+
+            <button type="submit" class="btn btn-primary">Oluştur</button>
+            <a type="button" class="btn btn-light"
+               asp-area="Admin"
+               asp-controller="Student"
+               asp-action="Index">Vazgeç</a>
+        </div>
+
+        <div class="col-4">
+            
+
+
+       
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Lessons"></label>
+                @foreach (var lesson in Model.Lessons)
+            {
+                <div>
+                    <input type="checkbox"
+                       class="form-check-input"
+                           name="selectedLessonIds"
+                       value="@lesson.Id"
+                       @if (Model.SelectedLessonIds!=null)
+                       {
+                       @(Model.SelectedLessonIds.Any(sc=>sc==lesson.Id) ? "checked" : "")
+                       } />
+                    <label>@lesson.Name</label>
+                </div>
+
+            }
+
+                <span asp-validation-for="SelectedLessonIds" class="text-danger"></span>
+        </div>
+            <div class="mb-3">
+
+                <input type="checkbox" class="form-check-input" asp-for="IsHome" />
+                <label asp-for="IsHome" class="form-label"></label>
+                <span asp-validation-for="IsHome" class="text-danger"></span>
+
+            </div>
+      
+
+    </div>
+    </div>
+
+
+</form>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<script>
+
+    const imgViewer = document.getElementById('img-viewer');
+    const imgUrl = document.getElementById('img-url');
+    const imgFile = document.getElementById('ImageFile');
+
+    imgFile.addEventListener('change', function (event) {
+        const files = event.target.files;
+        imgViewer.setAttribute('src', window.URL.createObjectURL(files[0]));
+
+        imgUrl.innerText = files[0].name;
+    });
+
+</script>
+

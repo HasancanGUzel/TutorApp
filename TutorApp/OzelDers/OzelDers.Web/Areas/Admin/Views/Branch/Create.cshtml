@@ -1,0 +1,53 @@
+﻿@model BranchAddDto
+<h1>Yeni Branş Ekleme</h1>
+<hr />
+<form asp-area="Admin"
+      asp-controller="Branch"
+      asp-action="Create"
+      method="post"
+      enctype="multipart/form-data">
+    @*resim veya herhangi bir dosayanın eklenmesi için*@
+    <div class="row">
+        <div class="col-8">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+        <div class="col-4">
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Lessons"></label>
+
+
+                @foreach (var lesson in Model.Lessons)
+                {
+                    <div>
+                        <input type="checkbox"
+                           class="form-check-input"
+                           name="selectedlessonIds"
+                           value="@lesson.Id"
+                           @if (Model.SelectedLessonIds !=null)
+                           {
+                           @(Model.SelectedLessonIds.Any(sc=>sc==lesson.Id) ?"checked":"") @*productController da cretae postunda açıkladım şimdi categoryleride buaray yolladık fakat bunu kontrol ettirmemiz lazım buarya if koyamasaydık yeni ekleneceği zaman hata veriyordu onu kontrol ettirdik sonra if bloğu içine
+                           modelden gelen seçili id categoryId ye eşitse checked yaptırdık
+                           *@
+                           } />
+                        @* her bir inputa cehcboxa  name="selectedcategoryIds" isim veriyoruz ve her birinizn ayrı bir value değeri oluyor value değeride ıd leri*@
+
+                        @*burdaki verilerde  ProductAddDto daki (int[] SelectedCategoryIds) de tutuluyor*@ @*Any varmı demek *@
+
+                        <label>@lesson.Name</label>
+                    </div>
+                }
+                <span asp-validation-for="SelectedLessonIds" class="text-danger"></span>
+
+            </div>
+
+           
+
+        </div>
+    </div>
+</form>

@@ -1,0 +1,59 @@
+﻿@model BranchUpdateDto
+<h1> Branş Güncelleme</h1>
+<hr />
+<form asp-area="Admin"
+      asp-controller="Branch"
+      asp-action="Edit"
+      method="post"
+     >
+   
+    <div class="row">
+        <div class="col-8">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a type="button" class="btn btn-danger"
+               asp-area="Admin"
+               asp-controller="Branch"
+               asp-action="Delete"
+               asp-route-id=@Model.Id>Sil</a>
+            <a type="button" class="btn btn-light"
+               asp-area="Admin"
+               asp-controller="Branch"
+               asp-action="Index">Vazgeç</a>
+        </div>
+        <div class="col-4">
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Lessons"></label>
+
+
+                @foreach (var lesson in Model.Lessons)
+                {
+                    <div>
+                        <input type="checkbox"
+                           class="form-check-input"
+                           name="selectedlessonIds"
+                           value="@lesson.Id"
+                           @if (Model.SelectedLessonIds !=null)
+                           {
+                           @(Model.SelectedLessonIds.Any(sc=>sc==lesson.Id) ?"checked":"") 
+                           } />
+                       
+
+                        <label>@lesson.Name</label>
+                    </div>
+                }
+                <span asp-validation-for="SelectedLessonIds" class="text-danger"></span>
+
+            </div>
+
+            
+
+        </div>
+    </div>
+</form>

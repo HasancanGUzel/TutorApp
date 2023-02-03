@@ -1,0 +1,28 @@
+﻿@using OzelDers.Web.Models.Dtos;
+@model LoginDto
+
+<form asp-controller="Account" asp-action="Login" method="post">
+  <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
+  <div class="row">
+    <div class="col-11 col-md-6 col-xl-4 card py-4 px-4 mx-auto">
+      <h1 class="text-muted mb-4 text-center">Giriş Yap</h1>
+      <div class="form-outline">
+        <input id="email" class="form-control" asp-for="Email">
+        <label asp-for="Email" for="email" class="form-label"></label>
+      </div>
+      <span asp-validation-for="Email" class="form-text text-danger mb-2"></span>
+      <div class="form-outline">
+        <input id="password" class="form-control" asp-for="Password">
+        <label asp-for="Password" for="password" class="form-label"></label>
+      </div>
+      <span asp-validation-for="Password" class="form-text text-danger mb-2"></span>
+
+      <br>
+
+      <button type="submit" class="btn btn-primary mb-2">Giriş Yap</button>
+      <a class="btn btn-info mb-2" asp-controller="Account" asp-action="ForgotPassword">Şifremi
+        Unuttum</a>
+      <a type="button" class="btn btn-light mb-2" asp-controller="Home" asp-action="Index">Vazgeç</a>
+    </div>
+  </div>
+</form>

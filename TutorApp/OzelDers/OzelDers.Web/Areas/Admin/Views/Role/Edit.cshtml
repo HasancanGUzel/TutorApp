@@ -1,0 +1,76 @@
+﻿@using OzelDers.Core;
+@model RoleDetailsDto// edit getmetoduan gelen veiler
+<h3><span class="text-danger">@Model.Role.Name </span> rolü kullanıcıları düzenleniyor</h3>
+<hr />
+<form asp-area="admin"
+      asp-controller="Role"
+      asp-action="Edit"
+      method="post">
+    <input type="hidden" name="RoleId" value="@Model.Role.Id" />@*hangi rolle çalıştığım bilgiis*@
+    <input type="hidden" name="RoleName" value="@Model.Role.Name" /> @*ve ismi*@
+    <input type="hidden" name="From" value="@ViewBag.From" />
+
+    <div class="row">
+
+
+        <div class="col-6">
+            @*nonmembers ler gözükecek*@
+            <h6 class="bg-success text-white p-3">@Model.Role.Name Rolüne ekle</h6>
+            @if (Model.NonMembers.Count == 0)
+            {
+                <tr>
+                    <td>
+                        <div class="alert alert-warning">Tüm kullanıcılar zaten @Model.Role.Name rolüne ait </div>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <table class="table table-sm table-bordered">
+                    @foreach (var user in Model.NonMembers)
+                    {
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="IdsToAdd" value="@user.Id" />@user.UserName
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+
+
+        <div class="col-6">
+            @*memberslar gözükücek*@
+            <h6 class="bg-danger text-white p-3">@Model.Role.Name Rolünden kaldır</h6>
+
+
+            @if (Model.Members.Count == 0)
+            {
+                <tr>
+                    <td>
+                        <div class="alert alert-warning">@Model.Role.Name rolüne ait hiç kullancıı yok</div>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <table class="table table-sm table-bordered">
+                    @foreach (var user in Model.Members)
+                    {
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" name="IdsToRemove" value="@user.Id" />@user.UserName
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+            }
+
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Değişiklikleri kaydet</button>
+
+</form>

@@ -1,0 +1,50 @@
+﻿@model List<BranchListDto>
+<h1>Branşlar</h1>
+<br>
+<a class="btn btn-outline-primary"
+   asp-area="Admin"
+   asp-controller="Branch"
+   asp-action="Create">Yeni Branş Ekle</a>
+<hr />
+<table class="table table-responsive table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Adı</th>
+            <th>Dersler</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Branch.Id</td>
+                <td>@item.Branch.Name</td>
+                <td>
+                    <ul>
+                        @foreach (var lesson in item.Branch.LessonBranch)
+                        {
+                            <li>@lesson.Lesson.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+
+                    <a class="btn btn-warning btn-sm"
+                   asp-area="Admin"
+                   asp-controller="Branch"
+                   asp-action="Edit"
+                   asp-route-id=@item.Branch.Id>Düzenle</a>
+
+                    <a class="btn btn-danger btn-sm"
+                   asp-area="Admin"
+                   asp-controller="Branch"
+                   asp-action="Delete"
+                   asp-route-id=@item.Branch.Id>Sil</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
